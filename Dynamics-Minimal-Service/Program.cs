@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Data8.PowerPlatform.Dataverse.Client;
 using Microsoft.Crm.Sdk.Messages;
 
