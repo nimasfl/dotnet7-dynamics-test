@@ -1,0 +1,18 @@
+variables:
+  app_name: 'dotnet7-crm-test'
+
+stages:
+  - deploy_master
+
+before_script:
+  - docker login -u wt -p $wt_pass $CI_REGISTRY
+
+deploy_on_master:
+  stage: deploy_master
+  only:
+    - master
+  tags:
+    - ne-runner
+  script:
+    - DOCKER_BUILDKIT=1 docker build --progress=plain -t $CI_REGISTRY/devops/crm/$app_name . -f Dockerfile
+    - docker push $CI_REGISTRY/devops/crm/$app_name
